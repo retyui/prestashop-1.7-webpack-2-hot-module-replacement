@@ -74,10 +74,10 @@
                       <div class="modal-body">
                         {foreach from=$customization.fields item="field"}
                           <div class="product-customization-line row">
-                            <div class="col-sm-3 col-xs-4 label">
+                            <div class="col-sm-3 col-4 label">
                               {$field.label}
                             </div>
-                            <div class="col-sm-9 col-xs-8 value">
+                            <div class="col-sm-9 col-8 value">
                               {if $field.type == 'text'}
                                 {if (int)$field.id_module}
                                   {$field.text nofilter}
@@ -185,10 +185,10 @@
             </div>
             <div class="col-sm-7 qty">
               <div class="row">
-                <div class="col-xs-4 text-sm-left text-xs-left">
+                <div class="col-4 text-sm-left text-xs-left">
                   {$product.price}
                 </div>
-                <div class="col-xs-4">
+                <div class="col-4">
                   {if $product.customizations}
                     {foreach $product.customizations as $customization}
                       <div class="q">{l s='Quantity' d='Shop.Theme.Catalog'}: {$customization.quantity}</div>
@@ -204,7 +204,7 @@
                     <div>{l s='Returned' d='Shop.Theme.CustomerAccount'}: {$product.qty_returned}</div>
                   {/if}
                 </div>
-                <div class="col-xs-4 text-xs-right">
+                <div class="col-4 text-xs-right">
                   {$product.total}
                 </div>
               </div>
@@ -219,14 +219,14 @@
   {foreach $order.subtotals as $line}
     {if $line.value}
       <div class="order-total row">
-        <div class="col-xs-8"><strong>{$line.label}</strong></div>
-        <div class="col-xs-4 text-xs-right">{$line.value}</div>
+        <div class="col-8"><strong>{$line.label}</strong></div>
+        <div class="col-4 text-xs-right">{$line.value}</div>
       </div>
     {/if}
   {/foreach}
   <div class="order-total row">
-    <div class="col-xs-8"><strong>{$order.totals.total.label}</strong></div>
-    <div class="col-xs-4 text-xs-right">{$order.totals.total.value}</div>
+    <div class="col-8"><strong>{$order.totals.total.label}</strong></div>
+    <div class="col-4 text-xs-right">{$order.totals.total.value}</div>
   </div>
 </div>
 
