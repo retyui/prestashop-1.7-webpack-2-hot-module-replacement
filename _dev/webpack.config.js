@@ -39,6 +39,21 @@ plugins.push(
 	})
 );
 
+if (!production) {
+	plugins.unshift(new(require('hard-source-webpack-plugin'))({
+		cacheDirectory: path.resolve(__dirname, './tmp/hard-plugin/[confighash]')
+		, recordsPath: path.resolve(__dirname, './tmp/hard-plugin/[confighash]/records.json')
+		, configHash: function(webpackConfig) {
+			return require('node-object-hash')().hash(webpackConfig);
+		}
+		, environmentHash: {
+			root: process.cwd()
+			, directories: ['node_modules']
+			, files: ['package.json']
+		}
+	}))
+}
+
 let addHOT = (arr, disable) => {
 	if (HOT) {
 		arr.unshift('webpack/hot/dev-server', 'webpack-hot-middleware/client');
