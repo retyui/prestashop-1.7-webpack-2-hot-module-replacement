@@ -1,5 +1,4 @@
-var ref;
-const HOT = ((ref = module.parent.filename) != null ? ref.indexOf('hot.webpack.js') : void 0) !== -1;
+var ref, HOT = ((ref = module.parent.filename) != null ? ref.indexOf('hot.webpack.js') : void 0) !== -1;
 console.log('Webpack HOT : ', HOT, '\n');
 
 var webpack = require('webpack');
@@ -19,15 +18,24 @@ if (production) {
 		})
 	);
 }
+
 if (HOT) {
 	plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 plugins.push(
+	new webpack.DefinePlugin({
+		'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
+		// HOT: HOT,
+		// lang: JSON.stringify('en')
+	})
+);
+
+plugins.push(
 	new ExtractTextPlugin({
-		filename: path.join('..', 'css', 'theme.css')
-		, allChunks: true
-		, disable: HOT // if hot enabled disable ExtractTextPlugin
+		filename: path.join('..', 'css', 'theme.css'),
+		allChunks: true,
+		disable: HOT // if hot enabled disable ExtractTextPlugin
 	})
 );
 
@@ -41,17 +49,17 @@ let addHOT = (arr, disable) => {
 module.exports = {
 	entry: {
 		theme: addHOT(['./js/theme.js'])
-	}
-	, output: {
-		path: path.resolve(__dirname + '/../assets/js')
-		, filename: 'theme.js'
-	}
-	, module: {
+	},
+	output: {
+		path: path.resolve(__dirname + '/../assets/js'),
+		filename: 'theme.js'
+	},
+	module: {
 		rules: [{
-			test: /\.js$/
-			, use: {
-				loader: 'babel-loader'
-				, options: {
+			test: /\.js$/,
+			use: {
+				loader: 'babel-loader',
+				options: {
 					presets: [
 						['env', {
 							modules: false
@@ -59,56 +67,56 @@ module.exports = {
 								//   browsers: ['last 2 versions', 'safari 7']
 								// }
 						}]
-					]
-					, plugins: ['syntax-dynamic-import']
+					],
+					plugins: ['syntax-dynamic-import']
 				}
 			}
 		}, {
-			test: /\.scss$/
-			, loader: ExtractTextPlugin.extract({
-				fallback: 'style-loader'
-				, use: [{
-					loader: 'css-loader'
-					, options: {
-						sourceMap: true
-						, importLoaders: 2
+			test: /\.scss$/,
+			loader: ExtractTextPlugin.extract({
+				fallback: 'style-loader',
+				use: [{
+					loader: 'css-loader',
+					options: {
+						sourceMap: true,
+						importLoaders: 2
 					}
 				}, {
 					loader: 'postcss-loader'
 				}, {
-					loader: 'sass-loader'
-					, options: {
+					loader: 'sass-loader',
+					options: {
 						sourceMap: true
 					}
 				}]
 			})
 		}, {
-			test: /.(png|woff(2)?|eot|ttf|svg|jpe?g)(\?[a-z0-9=\.]+)?$/
-			, loader: 'file-loader?name=../css/[hash].[ext]'
+			test: /.(png|woff(2)?|eot|ttf|svg|jpe?g)(\?[a-z0-9=\.]+)?$/,
+			loader: 'file-loader?name=../css/[hash].[ext]'
 		}, {
-			test: /\.css$/
-			, loader: ExtractTextPlugin.extract({
-				fallback: 'style-loader'
-				, use: [{
-					loader: 'css-loader'
-					, options: {
-						sourceMap: true
-						, importLoaders: 1
+			test: /\.css$/,
+			loader: ExtractTextPlugin.extract({
+				fallback: 'style-loader',
+				use: [{
+					loader: 'css-loader',
+					options: {
+						sourceMap: true,
+						importLoaders: 1
 					}
 				}, {
 					loader: 'postcss-loader'
 				}]
 			})
 		}]
-	}
-	, externals: {
-		prestashop: 'prestashop'
-		, $: '$'
-		, jquery: 'jQuery'
-	}
-	, devtool: HOT ? 'cheap-module-inline-source-map' : 'source-map'
-	, plugins: plugins
-	, resolve: {
+	},
+	externals: {
+		prestashop: 'prestashop',
+		$: '$',
+		jquery: 'jQuery'
+	},
+	devtool: HOT ? 'cheap-module-inline-source-map' : 'source-map',
+	plugins: plugins,
+	resolve: {
 		extensions: ['.js', '.scss']
 	}
 };

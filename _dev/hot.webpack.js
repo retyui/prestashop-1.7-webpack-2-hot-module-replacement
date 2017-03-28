@@ -11,7 +11,7 @@ let webpackConfig        = require('./webpack.config.js');
  */
 const bsPort = 3000;
 webpackConfig.watch = false;
-webpackConfig.output.publicPath = `http://localhost:${bsPort}/ps/themes/classic/assets/js/` // url to webpack output path
+webpackConfig.output.publicPath = `http://localhost:${bsPort}/ps/themes/hmr-webpack2/assets/js/` // url to webpack output path
 
 let bundler = webpack(webpackConfig);
 
