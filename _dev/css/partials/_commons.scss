@@ -150,7 +150,7 @@ small.label, small.value {
 }
 .form-control-submit {
   &.disabled {
-    background: $brand-info;
+    // background: $brand-info;
     color: white;
   }
 }
