@@ -22,22 +22,12 @@ yarn
   
   3.2) Check `themeFolderName` and `webpackConfig.output.publicPath`
 
-4) Start hot/build/watch mode:
+4) Start hot mode:
 ```bash
 # Hot mode:
 npm run hot
 # or
 yarn hot
-
-# Build mode:
-npm run build
-# or
-yarn build
-
-# Watch mode:
-npm run watch
-# or
-yarn watch
 ```
 
 ### Other 
