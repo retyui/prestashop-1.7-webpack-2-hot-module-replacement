@@ -1,18 +1,44 @@
 # PrestaShop Classic Theme Example hot module replacement, webpack.config.js - for webpack 2.x version.
 
-
-## Install :
+## Get started 
+1 ) Clone demo repo:
 ```bash
-cd _dev
+# go to themes folder
+cd ./themes
+
+# clone theme (hmr-webpack2 is name theme, look config/theme.yml)
+git clone https://github.com/retyui/prestashop-1.7-webpack-2-hot-module-replacement ./hmr-webpack2
+```
+2) Install dependency:
+```bash
+cd ./hmr-webpack2/_dev
 npm install 
-//or
+# or
 yarn 
 ```
+3) Configurate paths:
 
-## Start hot:
+  3.1) Open file: `_dev/hot.webpack.js`
+  
+  3.2) Check `themeFolderName` and `webpackConfig.output.publicPath`
+
+4) Start hot/build/watch mode:
 ```bash
+# Hot mode:
 npm run hot
-//or
-yarn run hot
+# or
+yarn hot
+
+# Build mode:
+npm run build
+# or
+yarn build
+
+# Watch mode:
+npm run watch
+# or
+yarn watch
 ```
-## All changes:
+
+### Other 
+[Example Hot Module Replacement for `Webpack 1.x` Prestashop 1.7](https://github.com/retyui/prestashop-1.7-webpack-hot-module-replacement)
