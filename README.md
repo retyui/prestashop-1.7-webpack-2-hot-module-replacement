@@ -1,7 +1,7 @@
 # PrestaShop Classic Theme Example hot module replacement, webpack.config.js - for webpack 2.x version.
 
 ## Get started 
-1 ) Clone demo repo:
+1) Clone demo repo:
 ```bash
 # go to themes folder
 cd ./themes
@@ -18,9 +18,9 @@ yarn
 ```
 3) Configurate paths:
 
-  3.1) Open file: `_dev/hot.webpack.js`
+  3.1) Open file: `_dev/hot.webpack.js`
   
-  3.2) Check `themeFolderName` and `webpackConfig.output.publicPath`
+  3.2) Check `themeFolderName` and `webpackConfig.output.publicPath`
 
 4) Start hot/build/watch mode:
 ```bash
