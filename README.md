@@ -30,5 +30,9 @@ npm run hot
 yarn hot
 ```
 
-### Other 
+### Other
 [Example Hot Module Replacement for `Webpack 1.x` Prestashop 1.7](https://github.com/retyui/prestashop-1.7-webpack-hot-module-replacement)
+
+[Example Hot Module Replacement for `Webpack 2.x` Prestashop 1.7](https://github.com/retyui/prestashop-1.7-webpack-2-hot-module-replacement)
+
+[Example Hot Module Replacement for `Webpack 3.x` Prestashop 1.7](https://github.com/retyui/prestashop-1.7-webpack-3-hot-module-replacement)
