@@ -24,6 +24,12 @@ if (HOT) {
 }
 
 plugins.push(
+	new webpack.ProvidePlugin({
+		'Popper': 'popper.js'
+	})
+);
+
+plugins.push(
 	new webpack.DefinePlugin({
 		'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
 		// HOT: HOT,
@@ -39,20 +45,20 @@ plugins.push(
 	})
 );
 
-if (!production) {
-	plugins.unshift(new(require('hard-source-webpack-plugin'))({
-		cacheDirectory: path.resolve(__dirname, './tmp/hard-plugin/[confighash]')
-		, recordsPath: path.resolve(__dirname, './tmp/hard-plugin/[confighash]/records.json')
-		, configHash: function(webpackConfig) {
-			return require('node-object-hash')().hash(webpackConfig);
-		}
-		, environmentHash: {
-			root: process.cwd()
-			, directories: ['node_modules']
-			, files: ['package.json']
-		}
-	}))
-}
+// if (!production) {
+// 	plugins.unshift(new(require('hard-source-webpack-plugin'))({
+// 		cacheDirectory: path.resolve(__dirname, './tmp/hard-plugin/[confighash]')
+// 		, recordsPath: path.resolve(__dirname, './tmp/hard-plugin/[confighash]/records.json')
+// 		, configHash: function(webpackConfig) {
+// 			return require('node-object-hash')().hash(webpackConfig);
+// 		}
+// 		, environmentHash: {
+// 			root: process.cwd()
+// 			, directories: ['node_modules']
+// 			, files: ['package.json']
+// 		}
+// 	}))
+// }
 
 let addHOT = (arr, disable) => {
 	if (HOT) {
@@ -67,7 +73,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname + '/../assets/js'),
-		filename: 'theme.js'
+		filename: '[name].js'
 	},
 	module: {
 		rules: [{

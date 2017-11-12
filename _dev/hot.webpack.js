@@ -1,38 +1,46 @@
 /**
  * Require Browsersync along with webpack and middleware for it
  */
-let browserSync          = require('browser-sync').create();
-let webpack              = require('webpack');
-let webpackDevMiddleware = require('webpack-dev-middleware');
-let webpackHotMiddleware = require('webpack-hot-middleware');
-let webpackConfig        = require('./webpack.config.js');
+const browserSync = require('browser-sync').create();
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('./webpack.config.js');
 /**
  * Require ./webpack.config.js and make a bundler from it
  */
 const bsPort = 3000;
+const themeFolderName = 'hmr-webpack2';
 webpackConfig.watch = false;
-webpackConfig.output.publicPath = `http://localhost:${bsPort}/ps/themes/hmr-webpack2/assets/js/` // url to webpack output path
+webpackConfig.output.publicPath = `http://localhost:${bsPort}/themes/${themeFolderName}/assets/js/` // url to webpack output path
 
-let bundler = webpack(webpackConfig);
+const bundler = webpack(webpackConfig);
 
 /**
  * Run Browsersync and use middleware for Hot Module Replacement
  */
 browserSync.init({
-	open: true
-	, port: bsPort
-	, proxy: {
-		target: `http://localhost:88` //host your local webserver
-	}
-	, src: [`./templates/**/*.tpl`, `./modules/**/*.tpl`] // full page reload if .tpl file changed
-	, middleware: [
-		webpackDevMiddleware( bundler, {
+	logLevel: "debug",
+	open: true,
+	port: bsPort,
+	proxy: {
+		target: 'http://localhost:8080' // host your local webserver 
+	},
+	files: [ // full page reload if .tpl file changed
+		'../templates/**/*.tpl',
+		'../modules/**/*.tpl'
+	],
+	middleware: [
+		webpackDevMiddleware(bundler, {
 			// IMPORTANT: dev middleware can't access config, so we should
 			// provide publicPath by ourselves
-			publicPath: webpackConfig.output.publicPath
-			, stats: { colors: true , chunck : false}
-			, hot: true
-		} ),
-		webpackHotMiddleware( bundler )
+			publicPath: webpackConfig.output.publicPath,
+			stats: {
+				colors: true,
+				chunck: false
+			},
+			hot: true
+		}),
+		webpackHotMiddleware(bundler)
 	]
 });
