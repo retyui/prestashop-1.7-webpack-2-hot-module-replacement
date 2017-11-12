@@ -9,10 +9,10 @@ const webpackConfig = require('./webpack.config.js');
 /**
  * Require ./webpack.config.js and make a bundler from it
  */
-const bsPort = 3000;
+const browserSyncPort = 3000;
 const themeFolderName = 'hmr-webpack2';
 webpackConfig.watch = false;
-webpackConfig.output.publicPath = `http://localhost:${bsPort}/themes/${themeFolderName}/assets/js/` // url to webpack output path
+webpackConfig.output.publicPath = `http://localhost:${browserSyncPort}/themes/${themeFolderName}/assets/js/` // url to webpack output path
 
 const bundler = webpack(webpackConfig);
 
@@ -22,7 +22,7 @@ const bundler = webpack(webpackConfig);
 browserSync.init({
 	logLevel: "debug",
 	open: true,
-	port: bsPort,
+	port: browserSyncPort,
 	proxy: {
 		target: 'http://localhost:8080' // host your local webserver 
 	},
